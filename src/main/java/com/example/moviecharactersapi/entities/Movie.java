@@ -1,7 +1,6 @@
 package com.example.moviecharactersapi.entities;
 
 import jakarta.persistence.*;
-
 import java.util.Set;
 
 @Entity
@@ -10,76 +9,72 @@ public class Movie {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Column(length = 30, nullable = false)
-    private String name;
-    @Column(length = 20, nullable = false)
+    private String title;
+    @Column(length = 50, nullable = false)
     private String genre;
     @Column(nullable = false)
-    private int yearOfRelease;
+    private int year_of_release;
     @Column(length = 100, nullable = false)
     private String director;
     private String picture;
     private String trailer;
-
     @ManyToOne
     @JoinColumn(name = "franchise_id")
     private Franchise franchise;
-
     @ManyToMany
     private Set<Character> characters;
-
-
     public int getId() {
         return id;
     }
     public void setId(int id) {
         this.id = id;
     }
-
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
-
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String title) {
+        this.title = title;
     }
-
     public String getGenre() {
         return genre;
     }
-
     public void setGenre(String genre) {
         this.genre = genre;
     }
-
-    public int getYearOfRelease() {
-        return yearOfRelease;
+    public int getYear_of_release() {
+        return year_of_release;
     }
-
-    public void setYearOfRelease(int yearOfRelease) {
-        this.yearOfRelease = yearOfRelease;
+    public void setYear_of_release(int yearOfRelease) {
+        this.year_of_release = yearOfRelease;
     }
-
     public String getDirector() {
         return director;
     }
-
     public void setDirector(String director) {
         this.director = director;
     }
-
     public String getPicture() {
         return picture;
     }
-
     public void setPicture(String picture) {
         this.picture = picture;
     }
-
     public String getTrailer() {
         return trailer;
     }
-
     public void setTrailer(String trailer) {
         this.trailer = trailer;
+    }
+    public Franchise getFranchise() {
+        return franchise;
+    }
+    public void setFranchise(Franchise franchise) {
+        this.franchise = franchise;
+    }
+    public Set<Character> getCharacters() {
+        return characters;
+    }
+    public void setCharacters(Set<Character> characters) {
+        this.characters = characters;
     }
 }
