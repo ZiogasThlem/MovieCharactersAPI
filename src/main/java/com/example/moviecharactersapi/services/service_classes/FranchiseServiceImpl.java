@@ -1,8 +1,7 @@
 package com.example.moviecharactersapi.services.service_classes;
 
-import com.example.moviecharactersapi.entities.Franchise;
+import com.example.moviecharactersapi.models.Franchise;
 import com.example.moviecharactersapi.repositories.FranchiseRepository;
-import com.example.moviecharactersapi.repositories.MovieRepository;
 import com.example.moviecharactersapi.services.service_interfaces.FranchiseService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

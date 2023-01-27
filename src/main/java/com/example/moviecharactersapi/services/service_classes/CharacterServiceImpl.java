@@ -1,6 +1,6 @@
 package com.example.moviecharactersapi.services.service_classes;
 
-import com.example.moviecharactersapi.entities.Character;
+import com.example.moviecharactersapi.models.Character;
 import com.example.moviecharactersapi.repositories.CharacterRepository;
 import com.example.moviecharactersapi.services.service_interfaces.CharacterService;
 import org.slf4j.Logger;

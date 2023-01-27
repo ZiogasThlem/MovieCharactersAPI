@@ -1,6 +1,6 @@
 package com.example.moviecharactersapi.controllers;
 
-import com.example.moviecharactersapi.entities.Franchise;
+import com.example.moviecharactersapi.models.Franchise;
 import com.example.moviecharactersapi.services.service_interfaces.FranchiseService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
