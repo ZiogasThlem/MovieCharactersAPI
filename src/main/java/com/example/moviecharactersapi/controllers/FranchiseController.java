@@ -9,7 +9,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 @RestController
-@RequestMapping("api/v1/franchises")
+@RequestMapping(path = "api/v1/franchises")
 public class FranchiseController {
     private final FranchiseService franchiseService;
 

@@ -9,7 +9,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 @RestController
-@RequestMapping("api/v1/characters")
+@RequestMapping(path = "api/v1/characters")
 public class CharacterController {
     private final CharacterService characterService;
 

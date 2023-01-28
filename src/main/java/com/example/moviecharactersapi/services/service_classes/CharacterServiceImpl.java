@@ -11,16 +11,17 @@ import java.util.Collection;
 
 @Service
 public class CharacterServiceImpl implements CharacterService {
-
-    private final CharacterRepository characterRepository;
     private final Logger logger = LoggerFactory.getLogger(CharacterServiceImpl.class);
+    private final CharacterRepository characterRepository;
 
     public CharacterServiceImpl(CharacterRepository characterRepository) {
         this.characterRepository = characterRepository;
     }
 
     @Override
-    public Character findById(Integer integer) { return characterRepository.findById(integer).get(); }
+    public Character findById(Integer id) {
+        return characterRepository.findById(id).get();
+    }
 
     @Override
     public Collection<Character> findAll() { return characterRepository.findAll(); }

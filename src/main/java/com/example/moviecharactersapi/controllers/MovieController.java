@@ -14,8 +14,7 @@ import java.net.URISyntaxException;
 public class MovieController {
     private final MovieService movieService;
     public MovieController(MovieService movieService) {
-        this.movieService = movieService;
-    }
+        this.movieService = movieService;}
 
     @GetMapping
     public ResponseEntity getAll(){ return ResponseEntity.ok(movieService.findAll()); }
@@ -38,6 +37,11 @@ public class MovieController {
             return ResponseEntity.badRequest().build();
         movieService.update(entity);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("{id}/characters")
+    public ResponseEntity getCharacters(@PathVariable int id){
+        return ResponseEntity.ok(movieService.getCharacters(id));
     }
 
     @PutMapping("{id}/characters")
