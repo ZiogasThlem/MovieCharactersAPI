@@ -1,10 +1,9 @@
-package com.example.moviecharactersapi.services.service_classes;
+package com.example.moviecharactersapi.services.movie;
 
 import com.example.moviecharactersapi.models.Character;
 import com.example.moviecharactersapi.models.Movie;
 import com.example.moviecharactersapi.repositories.CharacterRepository;
 import com.example.moviecharactersapi.repositories.MovieRepository;
-import com.example.moviecharactersapi.services.service_interfaces.MovieService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;

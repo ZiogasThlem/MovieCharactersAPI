@@ -1,8 +1,7 @@
 package com.example.moviecharactersapi.controllers;
 
 import com.example.moviecharactersapi.models.Movie;
-import com.example.moviecharactersapi.services.service_interfaces.CharacterService;
-import com.example.moviecharactersapi.services.service_interfaces.MovieService;
+import com.example.moviecharactersapi.services.movie.MovieService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
