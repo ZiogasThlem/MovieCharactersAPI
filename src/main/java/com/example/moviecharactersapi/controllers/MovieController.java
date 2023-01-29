@@ -17,10 +17,10 @@ public class MovieController {
         this.movieService = movieService;}
 
     @GetMapping
-    public ResponseEntity getAll(){ return ResponseEntity.ok(movieService.findAll()); }
+    public ResponseEntity findAll(){ return ResponseEntity.ok(movieService.findAll()); }
 
     @GetMapping("{id}")
-    public ResponseEntity getById(@PathVariable int id){ return ResponseEntity.ok(movieService.findById(id)); }
+    public ResponseEntity findById(@PathVariable int id){ return ResponseEntity.ok(movieService.findById(id)); }
 
     @PostMapping
     public ResponseEntity add(@RequestBody Movie entity) throws URISyntaxException {

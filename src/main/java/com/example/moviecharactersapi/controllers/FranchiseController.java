@@ -26,12 +26,14 @@ public class FranchiseController {
 
     @PostMapping
     public ResponseEntity add(@RequestBody Franchise entity) throws URISyntaxException {
+        //add franchise
         franchiseService.add(entity);
-        URI uri = new URI("api/v1/franchises" + entity.getId());
+        //creating uri with
+        URI uri = new URI("api/v1/franchises/" + entity.getId());
         return ResponseEntity.created(uri).build();
     }
 
-    @PostMapping
+    @PostMapping("{id}")
     public ResponseEntity update(@RequestBody Franchise entity, @PathVariable int id){
         if(id != entity.getId())
             return ResponseEntity.badRequest().build();
