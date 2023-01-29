@@ -1,5 +1,6 @@
 package com.example.moviecharactersapi.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,6 +18,7 @@ public class Franchise {
     private String name;
     @Column(length = 1000)
     private String description;
+    @JsonIgnore
     @OneToMany(mappedBy = "franchise")
     private Set<Movie> movieSet;
 }
