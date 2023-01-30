@@ -1,5 +1,6 @@
 package com.example.moviecharactersapi.controllers;
 
+import com.example.moviecharactersapi.mappers.CharacterMapper;
 import com.example.moviecharactersapi.models.Character;
 import com.example.moviecharactersapi.models.dto.character.CharacterDTO;
 import com.example.moviecharactersapi.services.character.CharacterService;
@@ -19,9 +20,11 @@ import java.net.URISyntaxException;
 @RequestMapping(path = "api/v1/characters")
 public class CharacterController {
     private final CharacterService characterService;
+    //private final CharacterMapper characterMapper;
 
-    public CharacterController(CharacterService characterService) {
+    public CharacterController(CharacterService characterService){ //, CharacterMapper characterMapper) {
         this.characterService = characterService;
+        //this.characterMapper = characterMapper;
     }
 
     @Operation(summary = "Gets all the Characters")
@@ -32,7 +35,12 @@ public class CharacterController {
                                 array = @ArraySchema( schema = @Schema(implementation = CharacterDTO.class)))})
     })
     @GetMapping
-    public ResponseEntity findAll(){ return ResponseEntity.ok(characterService.findAll()); }
+    public ResponseEntity findAll(){
+//        return ResponseEntity.ok(
+//                characterMapper.characterToCharacterDTO(
+//                        characterService.findAll()
+//                ));
+        return ResponseEntity.ok(characterService.findAll()); }
 
     @Operation(summary = "Finds the Character with the specific id")
     @ApiResponses(value = {

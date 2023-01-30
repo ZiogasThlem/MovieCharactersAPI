@@ -1,7 +1,15 @@
 package com.example.moviecharactersapi.controllers;
 
 import com.example.moviecharactersapi.models.Movie;
+import com.example.moviecharactersapi.models.dto.character.CharacterDTO;
+import com.example.moviecharactersapi.models.dto.movie.MovieDTO;
 import com.example.moviecharactersapi.services.movie.MovieService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,6 +23,13 @@ public class MovieController {
     public MovieController(MovieService movieService) {
         this.movieService = movieService;}
 
+    @Operation(summary = "Gets all the Movies")
+    @ApiResponses(value={
+            @ApiResponse(responseCode = "200",
+                    description = "Success",
+                    content = {@Content( mediaType = "application/json",
+                            array = @ArraySchema( schema = @Schema(implementation = MovieDTO.class)))})
+    })
     @GetMapping
     public ResponseEntity findAll(){ return ResponseEntity.ok(movieService.findAll()); }
 

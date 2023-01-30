@@ -8,9 +8,11 @@ INSERT INTO movie (title, genre, year_of_release, director)
 VALUES ('Scarface', 'Gangster, Thriller, Drama', 1982, 'Brian De Palma');
 INSERT INTO movie (title, genre, year_of_release, director)
 VALUES ('The Dark Knight', 'Superhero, Crime, Action', 2008, 'Christopher Nolan');
+INSERT INTO movie (title, genre, year_of_release, director)
+VALUES ('Spider-Man: No Way Home', 'Superhero, Action', 2021, 'Kevin Feige, Amy Pascal');
 
 
-INSERT INTO character (full_name, alias, gender) VALUES ('Micheal Jordan','Male');
+INSERT INTO character (full_name, alias, gender) VALUES ('Micheal Jordan', 'MJ', 'Male');
 INSERT INTO character (full_name, alias, gender) VALUES ('Peter Parker', 'Spider-Man','Male');
 INSERT INTO character (full_name, alias, gender) VALUES ('Monkey D. Luffy', 'Straw Hat','Male');
 INSERT INTO character (full_name, alias, gender) VALUES ('Shanks',null,'Male');
@@ -36,6 +38,7 @@ by DC Studios. It is based on characters that appear in American comic books pub
 
 INSERT INTO movie_characters (movies_id, characters_id) VALUES (1,1);
 INSERT INTO movie_characters (movies_id, characters_id) VALUES (3,2);
+INSERT INTO movie_characters (movies_id, characters_id) VALUES (6,2);
 INSERT INTO movie_characters (movies_id, characters_id) VALUES (2,3);
 INSERT INTO movie_characters (movies_id, characters_id) VALUES (2,4);
 INSERT INTO movie_characters (movies_id, characters_id) VALUES (1,5);
