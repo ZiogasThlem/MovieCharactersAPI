@@ -1,6 +1,5 @@
 package com.example.moviecharactersapi.models;
 
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -18,11 +17,10 @@ public class  Character {
     private String full_name;
     @Column(length=50)
     private String alias;
-    @Enumerated(EnumType.STRING)
-    private GenderType gender;
+    @Column(length=20)
+    private String gender;
     @Column(length = 100)
     private String picture;
-    @JsonIgnore
     @ManyToMany(mappedBy = "characters")
     private Set<Movie> movies;
 }

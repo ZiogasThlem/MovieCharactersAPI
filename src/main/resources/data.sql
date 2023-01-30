@@ -10,16 +10,17 @@ INSERT INTO movie (title, genre, year_of_release, director)
 VALUES ('The Dark Knight', 'Superhero, Crime, Action', 2008, 'Christopher Nolan');
 
 
-INSERT INTO character (full_name, alias) VALUES ('Micheal Jordan',null);
-INSERT INTO character (full_name, alias) VALUES ('Peter Parker', 'Spider-Man');
-INSERT INTO character (full_name, alias) VALUES ('Monkey D. Luffy', 'Straw Hat');
-INSERT INTO character (full_name, alias) VALUES ('Shanks',null);
-INSERT INTO character (full_name, alias) VALUES ('Bugs Bunny', 'Bugs');
-INSERT INTO character (full_name, alias) VALUES ('Harry Osborn', 'Green Goblin');
-INSERT INTO character (full_name, alias) VALUES ('Tony Montana', 'Scarface');
-INSERT INTO character (full_name, alias) VALUES ('Bruce Wayne', 'Batman');
-INSERT INTO character (full_name, alias) VALUES ('Alfred Pennywise', null);
-INSERT INTO character (full_name, alias) VALUES ('Manny Ray', null);
+INSERT INTO character (full_name, alias, gender) VALUES ('Micheal Jordan','Male');
+INSERT INTO character (full_name, alias, gender) VALUES ('Peter Parker', 'Spider-Man','Male');
+INSERT INTO character (full_name, alias, gender) VALUES ('Monkey D. Luffy', 'Straw Hat','Male');
+INSERT INTO character (full_name, alias, gender) VALUES ('Shanks',null,'Male');
+INSERT INTO character (full_name, alias, gender) VALUES ('Bugs Bunny', 'Bugs','Male');
+INSERT INTO character (full_name, alias, gender) VALUES ('Harry Osborn', 'Green Goblin','Male');
+INSERT INTO character (full_name, alias, gender) VALUES ('Tony Montana', 'Scarface','Male');
+INSERT INTO character (full_name, alias, gender) VALUES ('Bruce Wayne', 'Batman','Male');
+INSERT INTO character (full_name, alias, gender) VALUES ('Alfred Pennywise', null,'Male');
+INSERT INTO character (full_name, alias, gender) VALUES ('Manny Ray', null,'Male');
+INSERT INTO character (full_name, alias, gender) VALUES ('Jennifer Lopez', 'JLo','Female');
 
 
 INSERT INTO franchise (name, description) VALUES ('One Piece', 'One Piece is a Japanese
@@ -43,3 +44,4 @@ INSERT INTO movie_characters (movies_id, characters_id) VALUES (4,7);
 INSERT INTO movie_characters (movies_id, characters_id) VALUES (5,8);
 INSERT INTO movie_characters (movies_id, characters_id) VALUES (5,9);
 INSERT INTO movie_characters (movies_id, characters_id) VALUES (4,10);
+INSERT INTO movie_characters (movies_id, characters_id) VALUES (4,11);
