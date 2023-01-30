@@ -1,4 +1,4 @@
-package com.example.moviecharactersapi.services.service_interfaces;
+package com.example.moviecharactersapi.services;
 
 import java.util.Collection;
 
