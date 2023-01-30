@@ -49,7 +49,7 @@ public class CharacterController {
                             content = { @Content(mediaType = "application/json",
                             schema = @Schema(implementation = CharacterDTO.class))}),
             @ApiResponse( responseCode = "404",
-                            description = "Student does not exist with supplied id",
+                            description = "Character does not exist with supplied id",
                             content = @Content(mediaType = "application/json",
                             schema = @Schema(implementation = ProblemDetail.class)))})
     @GetMapping("{id}")

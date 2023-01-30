@@ -15,8 +15,8 @@ VALUES ('Spider-Man: No Way Home', 'Superhero, Action', 2021, 'Kevin Feige, Amy 
 INSERT INTO character (full_name, alias, gender) VALUES ('Micheal Jordan', 'MJ', 'Male');
 INSERT INTO character (full_name, alias, gender) VALUES ('Peter Parker', 'Spider-Man','Male');
 INSERT INTO character (full_name, alias, gender) VALUES ('Monkey D. Luffy', 'Straw Hat','Male');
-INSERT INTO character (full_name, alias, gender) VALUES ('Shanks',null,'Male');
-INSERT INTO character (full_name, alias, gender) VALUES ('Bugs Bunny', 'Bugs','Male');
+INSERT INTO character (full_name, alias, gender) VALUES ('Uta','Princess','Female');
+INSERT INTO character (full_name, alias, gender) VALUES ('Lola Bunny', null,'Female');
 INSERT INTO character (full_name, alias, gender) VALUES ('Harry Osborn', 'Green Goblin','Male');
 INSERT INTO character (full_name, alias, gender) VALUES ('Tony Montana', 'Scarface','Male');
 INSERT INTO character (full_name, alias, gender) VALUES ('Bruce Wayne', 'Batman','Male');
