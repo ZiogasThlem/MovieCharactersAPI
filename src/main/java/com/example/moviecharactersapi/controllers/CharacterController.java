@@ -91,4 +91,15 @@ public class CharacterController {
         characterService.update(entity);
         return ResponseEntity.noContent().build();
     }
+
+    @PostMapping("{id}")
+    public ResponseEntity delete(@RequestBody Character entity, @PathVariable int id) {
+        if (id != entity.getId())
+            return ResponseEntity.badRequest().build();
+
+        characterService.deleteById(id);
+        return ResponseEntity.noContent().build();
+    }
+
+
 }

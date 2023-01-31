@@ -1,5 +1,6 @@
 package com.example.moviecharactersapi.controllers;
 
+import com.example.moviecharactersapi.models.Character;
 import com.example.moviecharactersapi.models.Franchise;
 import com.example.moviecharactersapi.models.dto.character.CharacterDTO;
 import com.example.moviecharactersapi.models.dto.franchise.FranchiseDTO;
@@ -92,4 +93,15 @@ public class FranchiseController {
         return ResponseEntity.noContent().build();
     }
 
+    @PostMapping("{id}")
+    public ResponseEntity delete(@RequestBody Franchise entity, @PathVariable int id) {
+        if (id != entity.getId())
+            return ResponseEntity.badRequest().build();
+
+        entity.getMovieSet().forEach(f -> f.setFranchise(null));
+        franchiseService.deleteById(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    //get characters
 }

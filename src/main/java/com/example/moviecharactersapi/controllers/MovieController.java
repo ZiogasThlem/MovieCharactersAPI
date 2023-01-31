@@ -1,5 +1,6 @@
 package com.example.moviecharactersapi.controllers;
 
+import com.example.moviecharactersapi.models.Franchise;
 import com.example.moviecharactersapi.models.Movie;
 import com.example.moviecharactersapi.models.dto.movie.MovieDTO;
 import com.example.moviecharactersapi.services.movie.MovieService;
@@ -73,7 +74,7 @@ public class MovieController {
                     content = { @Content(mediaType = "application/json",
                             schema = @Schema(implementation = ProblemDetail.class))}),
             @ApiResponse( responseCode = "404",
-                    description = "Character not found",
+                    description = "Movie not found",
                     content = { @Content(mediaType = "application/json",
                             schema = @Schema(implementation = ProblemDetail.class))})
     })
@@ -116,6 +117,16 @@ public class MovieController {
     @PutMapping("{id}/characters")
     public ResponseEntity updateCharacters(@PathVariable int id, @RequestBody int[] charactersIds){
         movieService.updateCharacters(id,charactersIds);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PostMapping("{id}")
+    public ResponseEntity delete(@RequestBody Movie entity, @PathVariable int id) {
+        if (id != entity.getId())
+            return ResponseEntity.badRequest().build();
+
+//        entity.getCharacters().forEach(m -> m.setMovies());
+        movieService.deleteById(id);
         return ResponseEntity.noContent().build();
     }
 }
