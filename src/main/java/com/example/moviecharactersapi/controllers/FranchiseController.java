@@ -1,12 +1,10 @@
 package com.example.moviecharactersapi.controllers;
 
-import com.example.moviecharactersapi.models.Character;
+import com.example.moviecharactersapi.mappers.FranchiseMapper;
 import com.example.moviecharactersapi.models.Franchise;
-import com.example.moviecharactersapi.models.dto.character.CharacterDTO;
 import com.example.moviecharactersapi.models.dto.franchise.FranchiseDTO;
 import com.example.moviecharactersapi.services.franchise.FranchiseService;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -22,9 +20,11 @@ import java.net.URISyntaxException;
 @RequestMapping(path = "api/v1/franchises")
 public class FranchiseController {
     private final FranchiseService franchiseService;
+    private final FranchiseMapper franchiseMapper;
 
-    public FranchiseController(FranchiseService franchiseService) {
+    public FranchiseController(FranchiseService franchiseService, FranchiseMapper franchiseMapper) {
         this.franchiseService = franchiseService;
+        this.franchiseMapper = franchiseMapper;
     }
 
 
@@ -37,7 +37,9 @@ public class FranchiseController {
     })
     @GetMapping
     public ResponseEntity findAll(){
-        return ResponseEntity.ok(franchiseService.findAll());
+
+        return ResponseEntity.ok( franchiseMapper.franchiseToFranchiseDTO(
+                franchiseService.findAll()));
     }
 
     @Operation(summary = "Finds the Franchise with the specific id")
@@ -98,7 +100,7 @@ public class FranchiseController {
         if (id != entity.getId())
             return ResponseEntity.badRequest().build();
 
-        entity.getMovieSet().forEach(f -> f.setFranchise(null));
+        entity.getMovies().forEach(f -> f.setFranchise(null));
         franchiseService.deleteById(id);
         return ResponseEntity.noContent().build();
     }

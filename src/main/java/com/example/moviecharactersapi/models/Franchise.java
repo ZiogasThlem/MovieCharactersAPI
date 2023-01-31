@@ -20,5 +20,5 @@ public class Franchise {
     private String description;
     @JsonIgnore
     @OneToMany(mappedBy = "franchise")
-    private Set<Movie> movieSet;
+    private Set<Movie> movies;
 }

@@ -43,6 +43,6 @@ public class FranchiseServiceImpl implements FranchiseService {
 
     @Override
     public Collection<Movie> getMovies(int moviesId) {
-        return franchiseRepository.findById(moviesId).get().getMovieSet();
+        return franchiseRepository.findById(moviesId).get().getMovies();
     }
 }
