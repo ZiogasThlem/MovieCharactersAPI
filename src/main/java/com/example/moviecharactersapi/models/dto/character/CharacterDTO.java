@@ -1,6 +1,7 @@
 package com.example.moviecharactersapi.models.dto.character;
 
 import com.example.moviecharactersapi.models.Movie;
+import com.example.moviecharactersapi.models.dto.movie.MovieDTO;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,9 +11,6 @@ import java.util.Set;
 @Setter
 public class CharacterDTO {
     private int id;
-    private String full_name;
-    private String alias;
-    private String gender;
-    private String picture;
-    private Set<Movie> movies;
+    private String name;
+    private Set<Integer> movies;
 }

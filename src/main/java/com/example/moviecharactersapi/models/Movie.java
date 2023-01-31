@@ -29,7 +29,6 @@ public class Movie {
     @ManyToOne
     @JoinColumn(name = "franchise_id")
     private Franchise franchise;
-    @JsonIgnore
     @ManyToMany
     private Set<Character> characters;
 }

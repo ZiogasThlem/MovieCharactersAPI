@@ -3,6 +3,7 @@ package com.example.moviecharactersapi.controllers;
 import com.example.moviecharactersapi.mappers.CharacterMapper;
 import com.example.moviecharactersapi.models.Character;
 import com.example.moviecharactersapi.models.dto.character.CharacterDTO;
+import com.example.moviecharactersapi.models.dto.character.CharacterPostDTO;
 import com.example.moviecharactersapi.services.character.CharacterService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
@@ -20,11 +21,11 @@ import java.net.URISyntaxException;
 @RequestMapping(path = "api/v1/characters")
 public class CharacterController {
     private final CharacterService characterService;
-    //private final CharacterMapper characterMapper;
+    private final CharacterMapper characterMapper;
 
-    public CharacterController(CharacterService characterService){ //, CharacterMapper characterMapper) {
+    public CharacterController(CharacterService characterService, CharacterMapper characterMapper) {
         this.characterService = characterService;
-        //this.characterMapper = characterMapper;
+        this.characterMapper = characterMapper;
     }
 
     @Operation(summary = "Gets all the Characters")
@@ -36,11 +37,12 @@ public class CharacterController {
     })
     @GetMapping
     public ResponseEntity findAll(){
-//        return ResponseEntity.ok(
-//                characterMapper.characterToCharacterDTO(
-//                        characterService.findAll()
-//                ));
-        return ResponseEntity.ok(characterService.findAll()); }
+        return ResponseEntity.ok(
+                characterMapper.characterToCharacterDTO(
+                        characterService.findAll()
+                ));
+        //return ResponseEntity.ok(characterService.findAll());
+    }
 
     @Operation(summary = "Finds the Character with the specific id")
     @ApiResponses(value = {
@@ -53,7 +55,11 @@ public class CharacterController {
                             content = @Content(mediaType = "application/json",
                             schema = @Schema(implementation = ProblemDetail.class)))})
     @GetMapping("{id}")
-    public ResponseEntity findAllById(@PathVariable int id){ return ResponseEntity.ok(characterService.findById(id)); }
+    public ResponseEntity findAllById(@PathVariable int id){
+        return ResponseEntity.ok(
+                characterMapper.characterToCharacterDTO(
+                        characterService.findById(id)) );
+    }
 
     @Operation(summary = "Adds a new Character")
     @ApiResponses(value = {
@@ -62,9 +68,9 @@ public class CharacterController {
                     content = @Content)
     })
     @PostMapping
-    public ResponseEntity add(@RequestBody Character entity) throws URISyntaxException {
+    public ResponseEntity add(@RequestBody CharacterPostDTO entity) throws URISyntaxException {
         //add character
-        characterService.add(entity);
+        //characterService.add(entity); //do we need to use characterPostDTO?
         URI uri = new URI("api/v1/characters/" + entity.getId());
         return ResponseEntity.created(uri).build();
     }
@@ -92,7 +98,7 @@ public class CharacterController {
         return ResponseEntity.noContent().build();
     }
 
-    @PostMapping("{id}")
+    @DeleteMapping("{id}")
     public ResponseEntity delete(@RequestBody Character entity, @PathVariable int id) {
         if (id != entity.getId())
             return ResponseEntity.badRequest().build();

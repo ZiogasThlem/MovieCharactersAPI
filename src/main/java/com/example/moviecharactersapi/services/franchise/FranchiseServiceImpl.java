@@ -1,6 +1,7 @@
 package com.example.moviecharactersapi.services.franchise;
 
 import com.example.moviecharactersapi.models.Franchise;
+import com.example.moviecharactersapi.models.Movie;
 import com.example.moviecharactersapi.repositories.FranchiseRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,4 +40,9 @@ public class FranchiseServiceImpl implements FranchiseService {
 
     @Override
     public boolean exists(Integer integer) { return franchiseRepository.existsById(integer); }
+
+    @Override
+    public Collection<Movie> getMovies(int moviesId) {
+        return franchiseRepository.findById(moviesId).get().getMovieSet();
+    }
 }

@@ -93,7 +93,7 @@ public class FranchiseController {
         return ResponseEntity.noContent().build();
     }
 
-    @PostMapping("{id}")
+    @DeleteMapping("{id}")
     public ResponseEntity delete(@RequestBody Franchise entity, @PathVariable int id) {
         if (id != entity.getId())
             return ResponseEntity.badRequest().build();
@@ -103,5 +103,9 @@ public class FranchiseController {
         return ResponseEntity.noContent().build();
     }
 
+    @GetMapping("{id}/movies")
+    public ResponseEntity getMovies(@PathVariable int id){
+        return ResponseEntity.ok(franchiseService.getMovies(id));
+    }
     //get characters
 }

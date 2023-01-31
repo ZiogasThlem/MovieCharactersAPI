@@ -120,7 +120,7 @@ public class MovieController {
         return ResponseEntity.noContent().build();
     }
 
-    @PostMapping("{id}")
+    @DeleteMapping("{id}")
     public ResponseEntity delete(@RequestBody Movie entity, @PathVariable int id) {
         if (id != entity.getId())
             return ResponseEntity.badRequest().build();
