@@ -4,6 +4,7 @@ import com.example.moviecharactersapi.mappers.FranchiseMapper;
 import com.example.moviecharactersapi.models.Franchise;
 import com.example.moviecharactersapi.models.dto.franchise.FranchiseDTO;
 import com.example.moviecharactersapi.models.dto.franchise.FranchiseDeleteDTO;
+import com.example.moviecharactersapi.models.dto.movie.MovieDTO;
 import com.example.moviecharactersapi.services.franchise.FranchiseService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -134,6 +135,16 @@ public class FranchiseController {
         return ResponseEntity.noContent().build();
     }
 
+    @Operation(summary = "Deletes a Franchise by id")
+    @ApiResponses(value = {
+            @ApiResponse( responseCode =  "204",
+                    description = "Franchise deleted",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = MovieDTO.class))}),
+            @ApiResponse( responseCode = "404",
+                    description = "Franchise with supplied id, does not exist! ",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ProblemDetail.class)))})
     @DeleteMapping("{id}")
     public ResponseEntity delete(@RequestBody FranchiseDeleteDTO entity, @PathVariable int id) {
         if (id != entity.getId())

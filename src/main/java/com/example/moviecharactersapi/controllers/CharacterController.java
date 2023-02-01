@@ -3,6 +3,9 @@ package com.example.moviecharactersapi.controllers;
 import com.example.moviecharactersapi.mappers.CharacterMapper;
 import com.example.moviecharactersapi.models.Character;
 import com.example.moviecharactersapi.models.dto.character.CharacterDTO;
+import com.example.moviecharactersapi.models.dto.character.CharacterDeleteDTO;
+import com.example.moviecharactersapi.models.dto.franchise.FranchiseDeleteDTO;
+import com.example.moviecharactersapi.models.dto.movie.MovieDTO;
 import com.example.moviecharactersapi.services.character.CharacterService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
@@ -97,11 +100,22 @@ public class CharacterController {
         return ResponseEntity.noContent().build();
     }
 
+    @Operation(summary = "Deletes a Character by id")
+    @ApiResponses(value = {
+            @ApiResponse( responseCode =  "204",
+                    description = "Character deleted",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = MovieDTO.class))}),
+            @ApiResponse( responseCode = "404",
+                    description = "Character with supplied id, does not exist! ",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ProblemDetail.class)))})
     @DeleteMapping("{id}")
-    public ResponseEntity delete(@PathVariable int id) {
-        if (id != characterMapper.characterToCharacterDTO(characterService.findById(id)).getId())
+    public ResponseEntity delete(@RequestBody CharacterDeleteDTO entity, @PathVariable int id) {
+        if (id != entity.getId())
             return ResponseEntity.badRequest().build();
-        //characterMapper.characterToCharacterDTO(characterService.findById(id)).setMovies(null);
+        characterMapper.characterToCharacterDTO(characterService.findById(entity.getId())).setMovies(null);
+        //problem with movie_characters table reference
         characterService.deleteById(id);
         return ResponseEntity.noContent().build();
     }

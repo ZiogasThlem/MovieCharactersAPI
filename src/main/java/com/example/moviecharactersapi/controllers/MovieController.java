@@ -136,11 +136,11 @@ public class MovieController {
     @Operation(summary = "Deletes the Movie with the specific id")
     @ApiResponses(value = {
             @ApiResponse( responseCode =  "204",
-                    description = "Success",
+                    description = "Movie deleted",
                     content = { @Content(mediaType = "application/json",
                             schema = @Schema(implementation = MovieDTO.class))}),
             @ApiResponse( responseCode = "404",
-                    description = "Movie does not exist with supplied id",
+                    description = "Movie with supplied id, does not exist!",
                     content = @Content(mediaType = "application/json",
                             schema = @Schema(implementation = ProblemDetail.class)))})
     @DeleteMapping("{id}")
