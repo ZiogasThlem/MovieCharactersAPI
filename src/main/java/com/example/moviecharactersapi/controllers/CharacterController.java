@@ -69,10 +69,10 @@ public class CharacterController {
                     content = @Content)
     })
     @PostMapping
-    public ResponseEntity add(@RequestBody Character entity) throws URISyntaxException {
+    public ResponseEntity add(@RequestBody CharacterDTO entity) throws URISyntaxException {
         //add character
         characterMapper.characterToCharacterDTO(
-                characterService.add(entity)); //do we need to use characterPostDTO?
+                characterService.add(characterService.findById(entity.getId()))); //do we need to use characterPostDTO?
         URI uri = new URI("api/v1/characters/" + entity.getId());
         return ResponseEntity.created(uri).build();
     }
@@ -93,10 +93,10 @@ public class CharacterController {
                                     schema = @Schema(implementation = ProblemDetail.class))})
     })
     @PostMapping("{id}")
-    public ResponseEntity update(@RequestBody Character entity, @PathVariable int id){
+    public ResponseEntity update(@RequestBody CharacterDTO entity, @PathVariable int id){
         if(id != entity.getId())
             return  ResponseEntity.badRequest().build();
-        characterService.update(entity);
+        characterService.update(characterService.findById(entity.getId()));
         return ResponseEntity.noContent().build();
     }
 

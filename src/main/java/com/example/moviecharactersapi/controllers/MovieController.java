@@ -112,7 +112,7 @@ public class MovieController {
     }
 
 
-    @Operation(summary = "Updates the requested by id Characters from a Movie with a specific id")
+    @Operation(summary = "Updates characters in a movie")
     @ApiResponses(value = {
             @ApiResponse( responseCode = "204",
                     description = "Success",
