@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Collection;
 import java.util.Set;
 
 @Entity
@@ -30,5 +31,15 @@ public class Movie {
     @JoinColumn(name = "franchise_id")
     private Franchise franchise;
     @ManyToMany
+    @JoinTable(
+            name = "movie_characters",
+            joinColumns = {@JoinColumn(name = "movies_id")},
+            inverseJoinColumns = {@JoinColumn(name = "characters_id")}
+    )
     private Set<Character> characters;
+
+    public void removeMovie(Movie movie) {
+        this.characters.remove(movie);
+        movie.getCharacters().remove(this);
+    }
 }

@@ -5,4 +5,5 @@ import com.example.moviecharactersapi.services.CrudService;
 
 public interface CharacterService extends CrudService<Character, Integer> {
 
+
 }

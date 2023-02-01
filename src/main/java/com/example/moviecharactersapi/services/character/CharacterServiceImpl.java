@@ -1,6 +1,7 @@
 package com.example.moviecharactersapi.services.character;
 
 import com.example.moviecharactersapi.models.Character;
+import com.example.moviecharactersapi.models.Movie;
 import com.example.moviecharactersapi.repositories.CharacterRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,7 +36,12 @@ public class CharacterServiceImpl implements CharacterService {
     public void deleteById(Integer integer) { characterRepository.deleteById(integer); }
 
     @Override
-    public void delete(Character entity) { characterRepository.delete(entity); }
+    public void delete(Character entity) {
+        for (Movie movie: entity.getMovies()){
+            entity.removeMovie(movie);
+        }
+        characterRepository.delete(entity);
+    }
 
     @Override
     public boolean exists(Integer integer) {

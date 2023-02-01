@@ -1,12 +1,9 @@
 package com.example.moviecharactersapi.models.dto.movie;
 
-import com.example.moviecharactersapi.models.dto.character.CharacterListDTO;
-import com.example.moviecharactersapi.models.dto.franchise.FranchiseDTO;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Set;
-
+import java.util.Collection;
 @Getter
 @Setter
 public class MovieDTO {
@@ -14,7 +11,7 @@ public class MovieDTO {
     private String title;
     private String genre;
     private String year_of_release;
-    private FranchiseDTO franchise; //
-    private Set<CharacterListDTO> characters; //
+    private int franchise;
+    private Collection<Integer> characters;
 
 }

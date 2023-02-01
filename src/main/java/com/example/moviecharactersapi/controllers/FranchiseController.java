@@ -38,8 +38,9 @@ public class FranchiseController {
     @GetMapping
     public ResponseEntity findAll(){
 
-        return ResponseEntity.ok( franchiseMapper.franchiseToFranchiseDTO(
-                franchiseService.findAll()));
+        return ResponseEntity.ok(
+                franchiseMapper.franchiseToFranchiseDTO(
+                        franchiseService.findAll()));
     }
 
     @Operation(summary = "Finds the Franchise with the specific id")
@@ -54,7 +55,10 @@ public class FranchiseController {
                             schema = @Schema(implementation = ProblemDetail.class)))})
     @GetMapping("{id}")
     public ResponseEntity findById(@PathVariable int id){
-        return ResponseEntity.ok(franchiseService.findById(id));
+
+        return ResponseEntity.ok(
+                franchiseMapper.franchiseToFranchiseDTO(
+                        franchiseService.findById(id)));
     }
 
     @Operation(summary = "Adds a new Franchise")
@@ -66,7 +70,8 @@ public class FranchiseController {
     @PostMapping
     public ResponseEntity add(@RequestBody Franchise entity) throws URISyntaxException {
         //add franchise
-        franchiseService.add(entity);
+        franchiseMapper.franchiseToFranchiseDTO(
+                franchiseService.add(entity));
         //creating uri with
         URI uri = new URI("api/v1/franchises/" + entity.getId());
         return ResponseEntity.created(uri).build();
@@ -95,6 +100,39 @@ public class FranchiseController {
         return ResponseEntity.noContent().build();
     }
 
+    @GetMapping("{id}/movies")
+    public ResponseEntity getMovies(@PathVariable int id){
+
+        return ResponseEntity.ok(
+                franchiseMapper.franchiseGetMoviesDTO(franchiseService.getMovies(id)));
+    }
+
+    @GetMapping("{id}/characters")
+    public ResponseEntity getCharacters(@PathVariable int id){
+        return ResponseEntity.ok(
+                franchiseService.getCharacters(id));}
+
+    @Operation(summary = "Updates movies in a Franchise")
+    @ApiResponses(value = {
+            @ApiResponse( responseCode = "204",
+                    description = "Success",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = FranchiseDTO.class))}),
+            @ApiResponse(responseCode = "400",
+                    description = "Bad Request",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ProblemDetail.class))}),
+            @ApiResponse( responseCode = "404",
+                    description = "Character not found",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ProblemDetail.class))})
+    })
+    @PutMapping("{id}/movies")
+    public ResponseEntity updateMovies(@PathVariable int id, @RequestBody int[] moviesIds){
+        franchiseService.updateMovies(id,moviesIds);
+        return ResponseEntity.noContent().build();
+    }
+
     @DeleteMapping("{id}")
     public ResponseEntity delete(@RequestBody Franchise entity, @PathVariable int id) {
         if (id != entity.getId())
@@ -104,10 +142,4 @@ public class FranchiseController {
         franchiseService.deleteById(id);
         return ResponseEntity.noContent().build();
     }
-
-    @GetMapping("{id}/movies")
-    public ResponseEntity getMovies(@PathVariable int id){
-        return ResponseEntity.ok(franchiseService.getMovies(id));
-    }
-    //get characters
 }
