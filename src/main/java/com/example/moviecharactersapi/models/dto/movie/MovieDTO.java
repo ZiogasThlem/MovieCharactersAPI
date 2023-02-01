@@ -1,5 +1,6 @@
 package com.example.moviecharactersapi.models.dto.movie;
 
+import com.example.moviecharactersapi.models.Franchise;
 import lombok.Getter;
 import lombok.Setter;
 

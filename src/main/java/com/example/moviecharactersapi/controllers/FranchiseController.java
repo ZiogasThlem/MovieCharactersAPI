@@ -3,6 +3,7 @@ package com.example.moviecharactersapi.controllers;
 import com.example.moviecharactersapi.mappers.FranchiseMapper;
 import com.example.moviecharactersapi.models.Franchise;
 import com.example.moviecharactersapi.models.dto.franchise.FranchiseDTO;
+import com.example.moviecharactersapi.models.dto.franchise.FranchiseDeleteDTO;
 import com.example.moviecharactersapi.services.franchise.FranchiseService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -134,11 +135,11 @@ public class FranchiseController {
     }
 
     @DeleteMapping("{id}")
-    public ResponseEntity delete(@RequestBody Franchise entity, @PathVariable int id) {
+    public ResponseEntity delete(@RequestBody FranchiseDeleteDTO entity, @PathVariable int id) {
         if (id != entity.getId())
             return ResponseEntity.badRequest().build();
 
-        entity.getMovies().forEach(f -> f.setFranchise(null));
+        franchiseService.findById(entity.getId()).getMovies().forEach(f -> f.setFranchise(null));
         franchiseService.deleteById(id);
         return ResponseEntity.noContent().build();
     }

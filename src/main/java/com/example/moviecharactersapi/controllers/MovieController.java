@@ -98,6 +98,7 @@ public class MovieController {
         return ResponseEntity.noContent().build();
     }
 
+
     @Operation(summary = "Gets all the Characters from a Movie with a specific id")
     @ApiResponses(value={
             @ApiResponse(responseCode = "200",
