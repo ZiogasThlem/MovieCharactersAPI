@@ -1,6 +1,8 @@
 package com.example.moviecharactersapi.controllers;
 
+import com.example.moviecharactersapi.mappers.CharacterMapper;
 import com.example.moviecharactersapi.mappers.FranchiseMapper;
+import com.example.moviecharactersapi.mappers.MovieMapper;
 import com.example.moviecharactersapi.models.Franchise;
 import com.example.moviecharactersapi.models.dto.franchise.FranchiseDTO;
 import com.example.moviecharactersapi.models.dto.franchise.FranchiseDeleteDTO;
@@ -23,10 +25,14 @@ import java.net.URISyntaxException;
 public class FranchiseController {
     private final FranchiseService franchiseService;
     private final FranchiseMapper franchiseMapper;
+    private final MovieMapper movieMapper;
+    private final CharacterMapper characterMapper;
 
-    public FranchiseController(FranchiseService franchiseService, FranchiseMapper franchiseMapper) {
+    public FranchiseController(FranchiseService franchiseService, FranchiseMapper franchiseMapper, MovieMapper movieMapper, CharacterMapper characterMapper) {
         this.franchiseService = franchiseService;
         this.franchiseMapper = franchiseMapper;
+        this.movieMapper = movieMapper;
+        this.characterMapper = characterMapper;
     }
 
 
@@ -106,13 +112,15 @@ public class FranchiseController {
     public ResponseEntity getMovies(@PathVariable int id){
 
         return ResponseEntity.ok(
-                franchiseMapper.franchiseGetMoviesDTO(franchiseService.getMovies(id)));
+                movieMapper.movieToMovieDTO(
+                        franchiseService.getMovies(id)));
     }
 
     @GetMapping("{id}/characters")
     public ResponseEntity getCharacters(@PathVariable int id){
         return ResponseEntity.ok(
-                franchiseService.getCharacters(id));}
+               characterMapper.characterToCharacterDTO(
+                       franchiseService.getCharacters(id)));}
 
     @Operation(summary = "Updates movies in a Franchise")
     @ApiResponses(value = {

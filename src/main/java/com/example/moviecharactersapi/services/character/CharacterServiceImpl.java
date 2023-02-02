@@ -33,13 +33,14 @@ public class CharacterServiceImpl implements CharacterService {
     public Character update(Character entity) { return characterRepository.save(entity); }
 
     @Override
-    public void deleteById(Integer integer) { characterRepository.deleteById(integer); }
+    public void deleteById(Integer integer) {
+        for (Movie movie: characterRepository.getReferenceById(integer).getMovies()){
+            characterRepository.getReferenceById(integer).removeMovie(movie);
+        }
+        characterRepository.deleteById(integer); }
 
     @Override
     public void delete(Character entity) {
-        for (Movie movie: entity.getMovies()){
-            entity.removeMovie(movie);
-        }
         characterRepository.delete(entity);
     }
 

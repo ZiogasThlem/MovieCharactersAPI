@@ -115,7 +115,6 @@ public class CharacterController {
         if (id != entity.getId())
             return ResponseEntity.badRequest().build();
         characterMapper.characterToCharacterDTO(characterService.findById(entity.getId())).setMovies(null);
-        //problem with movie_characters table reference
         characterService.deleteById(id);
         return ResponseEntity.noContent().build();
     }
