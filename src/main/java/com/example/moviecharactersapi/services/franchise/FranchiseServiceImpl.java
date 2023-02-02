@@ -64,8 +64,10 @@ public class FranchiseServiceImpl implements FranchiseService {
     public void updateMovies(int franchiseId, int[] movies) {
         Franchise franchise = franchiseRepository.findById(franchiseId).get(); //getting the franchise from id
         Set<Movie> moviesList = new HashSet<>(); //creating a set to hold the movies
-        for(int id : movies) //for every movie id
+        for(int id : movies){ //for every movie id
+            movieRepository.findById(id).get().setFranchise(franchise);
             moviesList.add(movieRepository.findById(id).get()); //add this movie to the movieList
+        }
         franchise.setMovies(moviesList); //setting this set of movies to the franchise
         franchiseRepository.save(franchise); //saving the updated franchise
     }
