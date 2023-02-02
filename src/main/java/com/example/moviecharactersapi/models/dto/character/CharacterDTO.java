@@ -2,9 +2,9 @@ package com.example.moviecharactersapi.models.dto.character;
 
 import lombok.Getter;
 import lombok.Setter;
-
 import java.util.Set;
 
+/* This DTO created for user to work with a character */
 @Getter
 @Setter
 public class CharacterDTO {

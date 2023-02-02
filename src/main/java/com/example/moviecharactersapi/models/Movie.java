@@ -38,7 +38,7 @@ public class Movie {
     )
     private Set<Character> characters;
 
-    public void removeMovie(Movie movie) {
+    public void removeMovie(Movie movie) { //this function made to remove a movie from a movie??
         this.characters.remove(movie);
         movie.getCharacters().remove(this);
     }

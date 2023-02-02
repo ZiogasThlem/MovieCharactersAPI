@@ -53,12 +53,12 @@ public class MovieServiceImpl  implements MovieService {
 
     @Override
     public void updateCharacters(int movieId, int[] characters) {
-        Movie movie = movieRepository.findById(movieId).get();
-        Set<Character> characterList = new HashSet<>();
-        for (int id : characters) {
-            characterList.add(characterRepository.findById(id).get());
+        Movie movie = movieRepository.findById(movieId).get(); //getting the movie from id
+        Set<Character> characterList = new HashSet<>(); //creating a set to hold the characters
+        for (int id : characters) { //for every character id
+            characterList.add(characterRepository.findById(id).get()); //add this character to the characterList
       }
-        movie.setCharacters(characterList);
-        movieRepository.save(movie);
+        movie.setCharacters(characterList); //setting this set of characters to the movie
+        movieRepository.save(movie); //saving the updated movie
     }
 }

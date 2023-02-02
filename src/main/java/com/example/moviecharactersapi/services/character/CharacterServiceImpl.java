@@ -34,10 +34,11 @@ public class CharacterServiceImpl implements CharacterService {
 
     @Override
     public void deleteById(Integer integer) {
-        for (Movie movie: characterRepository.getReferenceById(integer).getMovies()){
-            characterRepository.getReferenceById(integer).removeMovie(movie);
+        //removing the movies of the specific character to be able to delete the character
+        for (Movie movie: characterRepository.getReferenceById(integer).getMovies()){ //for every movie in movies Set of character
+            characterRepository.getReferenceById(integer).removeMovie(movie); //remove this movie
         }
-        characterRepository.deleteById(integer); }
+        characterRepository.deleteById(integer); } //deletes the character
 
     @Override
     public void delete(Character entity) {

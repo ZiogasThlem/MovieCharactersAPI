@@ -24,7 +24,7 @@ public class  Character {
     @ManyToMany(mappedBy = "characters")
     private Set<Movie> movies;
 
-    public void removeMovie(Movie movie) {
+    public void removeMovie(Movie movie) { //this function made to remove a movie from a character
         this.movies.remove(movie);
         movie.getCharacters().remove(this);
     }

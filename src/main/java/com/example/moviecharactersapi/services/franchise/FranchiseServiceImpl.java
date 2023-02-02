@@ -54,19 +54,19 @@ public class FranchiseServiceImpl implements FranchiseService {
 
     @Override
     public Collection<Character> getCharacters(int franchiseId) {
-        Collection<Movie> movies = franchiseRepository.findById(franchiseId).get().getMovies();
-        Collection<Character> charactersOfMovies = new HashSet<>();
-        movies.forEach(s->s.getCharacters().addAll(charactersOfMovies));
-        return charactersOfMovies;
+        Collection<Movie> movies = franchiseRepository.findById(franchiseId).get().getMovies(); //getting the movies of a franchise
+        Collection<Character> charactersOfMovies = new HashSet<>(); //creating a collection which will hold all the characters of every movie in a franchise
+        movies.forEach(s->s.getCharacters().addAll(charactersOfMovies)); //for each movie in the franchise adding the characters in the charactersOfMovies collection
+        return charactersOfMovies; //returns alla the characters
     }
 
     @Override
     public void updateMovies(int franchiseId, int[] movies) {
-        Franchise franchise = franchiseRepository.findById(franchiseId).get();
-        Set<Movie> moviesList = new HashSet<>();
-        for(int id : movies)
-            moviesList.add(movieRepository.findById(id).get());
-        franchise.setMovies(moviesList);
-        franchiseRepository.save(franchise);
+        Franchise franchise = franchiseRepository.findById(franchiseId).get(); //getting the franchise from id
+        Set<Movie> moviesList = new HashSet<>(); //creating a set to hold the movies
+        for(int id : movies) //for every movie id
+            moviesList.add(movieRepository.findById(id).get()); //add this movie to the movieList
+        franchise.setMovies(moviesList); //setting this set of movies to the franchise
+        franchiseRepository.save(franchise); //saving the updated franchise
     }
 }

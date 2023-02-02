@@ -1,12 +1,8 @@
 package com.example.moviecharactersapi.models.dto.character;
 
-import com.example.moviecharactersapi.models.Movie;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.data.jpa.repository.Query;
-
-import java.util.Set;
-
+/* This DTO created only for user to delete a character */
 @Getter
 @Setter
 public class CharacterDeleteDTO {

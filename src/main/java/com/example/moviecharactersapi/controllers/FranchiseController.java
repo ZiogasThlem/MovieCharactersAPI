@@ -76,11 +76,11 @@ public class FranchiseController {
                     content = @Content)
     })
     @PostMapping
-    public ResponseEntity add(@RequestBody Franchise entity) throws URISyntaxException {
+    public ResponseEntity add(@RequestBody FranchiseDTO entity) throws URISyntaxException {
         //add franchise
         franchiseMapper.franchiseToFranchiseDTO(
-                franchiseService.add(entity));
-        //creating uri with
+                franchiseService.add(franchiseService.findById(entity.getId()))); //calls the franchise service to add the character by id
+        //creating uri with this franchise id
         URI uri = new URI("api/v1/franchises/" + entity.getId());
         return ResponseEntity.created(uri).build();
     }
@@ -101,13 +101,24 @@ public class FranchiseController {
                             schema = @Schema(implementation = ProblemDetail.class))})
     })
     @PostMapping("{id}")
-    public ResponseEntity update(@RequestBody Franchise entity, @PathVariable int id){
-        if(id != entity.getId())
-            return ResponseEntity.badRequest().build();
-        franchiseService.update(entity);
+    public ResponseEntity update(@RequestBody FranchiseDTO entity, @PathVariable int id){
+        if(id != entity.getId()) //checks if the given id is same with the given franchise actual id
+            return ResponseEntity.badRequest().build(); //if ids are different returns bad request response
+        franchiseMapper.franchiseToFranchiseDTO(
+                franchiseService.update(franchiseService.findById(entity.getId()))); //updates the franchise
         return ResponseEntity.noContent().build();
     }
 
+    @Operation(summary = "Gets all the movies in the Franchise with a specific id")
+    @ApiResponses(value = {
+            @ApiResponse( responseCode =  "200",
+                    description = "Success",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = FranchiseDTO.class))}),
+            @ApiResponse( responseCode = "404",
+                    description = "Franchise does not exist with supplied id",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ProblemDetail.class)))})
     @GetMapping("{id}/movies")
     public ResponseEntity getMovies(@PathVariable int id){
 
@@ -116,6 +127,16 @@ public class FranchiseController {
                         franchiseService.getMovies(id)));
     }
 
+    @Operation(summary = "Gets all the characters of a Franchise with a specific id")
+    @ApiResponses(value = {
+            @ApiResponse( responseCode =  "200",
+                    description = "Success",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = FranchiseDTO.class))}),
+            @ApiResponse( responseCode = "404",
+                    description = "Franchise does not exist with supplied id",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ProblemDetail.class)))})
     @GetMapping("{id}/characters")
     public ResponseEntity getCharacters(@PathVariable int id){
         return ResponseEntity.ok(
@@ -155,11 +176,11 @@ public class FranchiseController {
                             schema = @Schema(implementation = ProblemDetail.class)))})
     @DeleteMapping("{id}")
     public ResponseEntity delete(@RequestBody FranchiseDeleteDTO entity, @PathVariable int id) {
-        if (id != entity.getId())
-            return ResponseEntity.badRequest().build();
+        if (id != entity.getId()) // checks if the given id is same with the given franchise actual id
+            return ResponseEntity.badRequest().build(); //if ids are different returns bad request response
 
-        franchiseService.findById(entity.getId()).getMovies().forEach(f -> f.setFranchise(null));
-        franchiseService.deleteById(id);
+        franchiseService.findById(entity.getId()).getMovies().forEach(f -> f.setFranchise(null)); //making null the movies of this franchise to be able to delete this franchise
+        franchiseService.deleteById(id); //deletes the specific franchise
         return ResponseEntity.noContent().build();
     }
 }

@@ -1,10 +1,10 @@
 package com.example.moviecharactersapi.models.dto.movie;
 
-import com.example.moviecharactersapi.models.Franchise;
 import lombok.Getter;
 import lombok.Setter;
-
 import java.util.Collection;
+
+/* This DTO created for user to work with a movie */
 @Getter
 @Setter
 public class MovieDTO {

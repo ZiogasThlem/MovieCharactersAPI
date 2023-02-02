@@ -65,10 +65,10 @@ public class MovieController {
                     content = @Content)
     })
     @PostMapping
-    public ResponseEntity add(@RequestBody Movie entity) throws URISyntaxException {
+    public ResponseEntity add(@RequestBody MovieDTO entity) throws URISyntaxException {
         //add movie
         movieMapper.movieToMovieDTO(
-                movieService.add(entity));
+                movieService.add(movieService.findById(entity.getId()))); //calls the movie service to add the character by id
         //creating uri with new movies id
         URI uri = new URI("api/v1/movies/" + entity.getId());
         return ResponseEntity.created(uri).build();
@@ -90,11 +90,11 @@ public class MovieController {
                             schema = @Schema(implementation = ProblemDetail.class))})
     })
     @PostMapping("{id}")
-    public ResponseEntity update(@RequestBody Movie entity,@PathVariable int id){
-        if(id != entity.getId())
-            return ResponseEntity.badRequest().build();
+    public ResponseEntity update(@RequestBody MovieDTO entity,@PathVariable int id){
+        if(id != entity.getId()) //checks if the given id is same with the given movie actual id
+            return ResponseEntity.badRequest().build(); //if ids are different returns bad request response
         movieMapper.movieToMovieDTO(
-                movieService.update(entity));
+                movieService.update(movieService.findById(entity.getId()))); //updates the movie
         return ResponseEntity.noContent().build();
     }
 
@@ -145,11 +145,9 @@ public class MovieController {
                             schema = @Schema(implementation = ProblemDetail.class)))})
     @DeleteMapping("{id}")
     public ResponseEntity delete(@RequestBody MovieDeleteDTO entity, @PathVariable int id) {
-        if (id != entity.getId())
-            return ResponseEntity.badRequest().build();
-
-//        entity.getCharacters().forEach(m -> m.setMovies());
-        movieService.deleteById(id);
+        if (id != entity.getId()) // checks if the given id is same with the given movies actual id
+            return ResponseEntity.badRequest().build();  //if ids are different returns bad request response
+        movieService.deleteById(id); //deletes the specific movie
         return ResponseEntity.noContent().build();
     }
 }
