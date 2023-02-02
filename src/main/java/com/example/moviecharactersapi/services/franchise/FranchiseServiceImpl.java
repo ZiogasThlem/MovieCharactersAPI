@@ -42,12 +42,6 @@ public class FranchiseServiceImpl implements FranchiseService {
     public void deleteById(Integer integer) { franchiseRepository.deleteById(integer); }
 
     @Override
-    public void delete(Franchise entity) { franchiseRepository.delete(entity); }
-
-    @Override
-    public boolean exists(Integer integer) { return franchiseRepository.existsById(integer); }
-
-    @Override
     public Collection<Movie> getMovies(int franchiseId) {
         return franchiseRepository.findById(franchiseId).get().getMovies();
     }

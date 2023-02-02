@@ -40,13 +40,6 @@ public class MovieServiceImpl  implements MovieService {
     public void deleteById(Integer integer) { movieRepository.deleteById(integer); }
 
     @Override
-    public void delete(Movie entity) { movieRepository.delete(entity); }
-
-    @Override
-    public boolean exists(Integer integer) { return movieRepository.existsById(integer); }
-
-
-    @Override
     public Collection<Character> getCharacters(int characterId) {
         return movieRepository.findById(characterId).get().getCharacters();
     }

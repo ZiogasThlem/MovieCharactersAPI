@@ -39,14 +39,4 @@ public class CharacterServiceImpl implements CharacterService {
             characterRepository.getReferenceById(integer).removeMovie(movie); //remove this movie
         }
         characterRepository.deleteById(integer); } //deletes the character
-
-    @Override
-    public void delete(Character entity) {
-        characterRepository.delete(entity);
-    }
-
-    @Override
-    public boolean exists(Integer integer) {
-        return characterRepository.existsById(integer);
-    }
 }
