@@ -1,6 +1,5 @@
 package com.example.moviecharactersapi.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -14,7 +13,7 @@ public class  Character {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Column(length=50, nullable = false)
-    private String full_name;
+    private String name;
     @Column(length=50)
     private String alias;
     @Column(length=20)

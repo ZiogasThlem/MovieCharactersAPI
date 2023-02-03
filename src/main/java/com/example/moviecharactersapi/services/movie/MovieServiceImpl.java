@@ -4,8 +4,6 @@ import com.example.moviecharactersapi.models.Character;
 import com.example.moviecharactersapi.models.Movie;
 import com.example.moviecharactersapi.repositories.CharacterRepository;
 import com.example.moviecharactersapi.repositories.MovieRepository;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -17,7 +15,6 @@ public class MovieServiceImpl  implements MovieService {
 
     private final MovieRepository movieRepository;
     private final CharacterRepository characterRepository;
-    private final Logger logger = LoggerFactory.getLogger(MovieServiceImpl.class);
 
     public MovieServiceImpl(MovieRepository movieRepository, CharacterRepository characterRepository) {
         this.movieRepository = movieRepository;

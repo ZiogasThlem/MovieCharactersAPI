@@ -5,8 +5,6 @@ import com.example.moviecharactersapi.models.Franchise;
 import com.example.moviecharactersapi.models.Movie;
 import com.example.moviecharactersapi.repositories.FranchiseRepository;
 import com.example.moviecharactersapi.repositories.MovieRepository;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -18,7 +16,6 @@ public class FranchiseServiceImpl implements FranchiseService {
 
     private final FranchiseRepository franchiseRepository;
     private final MovieRepository movieRepository;
-    private final Logger logger = LoggerFactory.getLogger(FranchiseServiceImpl.class);
 
 
     public FranchiseServiceImpl(FranchiseRepository franchiseRepository, MovieRepository movieRepository) {
@@ -50,7 +47,7 @@ public class FranchiseServiceImpl implements FranchiseService {
     public Collection<Character> getCharacters(int franchiseId) {
         Collection<Movie> movies = franchiseRepository.findById(franchiseId).get().getMovies(); //getting the movies of a franchise
         Collection<Character> charactersOfMovies = new HashSet<>(); //creating a collection which will hold all the characters of every movie in a franchise
-        movies.forEach(s->s.getCharacters().addAll(charactersOfMovies)); //for each movie in the franchise adding the characters in the charactersOfMovies collection
+        movies.forEach(s-> charactersOfMovies.addAll(s.getCharacters())); //for each movie in the franchise adding the characters in the charactersOfMovies collection
         return charactersOfMovies; //returns alla the characters
     }
 

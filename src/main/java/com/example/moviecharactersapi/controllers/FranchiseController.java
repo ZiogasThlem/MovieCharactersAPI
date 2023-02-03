@@ -79,7 +79,9 @@ public class FranchiseController {
     public ResponseEntity add(@RequestBody FranchiseDTO entity) throws URISyntaxException {
         //add franchise
         franchiseMapper.franchiseToFranchiseDTO(
-                franchiseService.add(franchiseService.findById(entity.getId()))); //calls the franchise service to add the character by id
+                franchiseService.add(
+                        franchiseMapper.franchiseDtoToFranchise(entity)
+                )); //calls the franchise service to add the character by id
         //creating uri with this franchise id
         URI uri = new URI("api/v1/franchises/" + entity.getId());
         return ResponseEntity.created(uri).build();
@@ -105,7 +107,9 @@ public class FranchiseController {
         if(id != entity.getId()) //checks if the given id is same with the given franchise actual id
             return ResponseEntity.badRequest().build(); //if ids are different returns bad request response
         franchiseMapper.franchiseToFranchiseDTO(
-                franchiseService.update(franchiseService.findById(entity.getId()))); //updates the franchise
+                franchiseService.update(
+                        franchiseMapper.franchiseDtoToFranchise(entity)
+                )); //updates the franchise
         return ResponseEntity.noContent().build();
     }
 

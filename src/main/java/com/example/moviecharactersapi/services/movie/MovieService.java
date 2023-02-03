@@ -2,6 +2,7 @@ package com.example.moviecharactersapi.services.movie;
 
 import com.example.moviecharactersapi.models.Character;
 import com.example.moviecharactersapi.models.Movie;
+import com.example.moviecharactersapi.models.dto.movie.MovieDTO;
 import com.example.moviecharactersapi.services.CrudService;
 
 import java.util.Collection;

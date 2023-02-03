@@ -1,7 +1,9 @@
 package com.example.moviecharactersapi.mappers;
 
+import com.example.moviecharactersapi.models.Character;
 import com.example.moviecharactersapi.models.Franchise;
 import com.example.moviecharactersapi.models.Movie;
+import com.example.moviecharactersapi.models.dto.character.CharacterDTO;
 import com.example.moviecharactersapi.models.dto.franchise.FranchiseDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -18,6 +20,9 @@ public interface FranchiseMapper {
     FranchiseDTO franchiseToFranchiseDTO(Franchise franchise);
 
     Collection<FranchiseDTO> franchiseToFranchiseDTO(Collection<Franchise> franchise);
+
+    @Mapping(target = "movies", ignore = true)
+    Franchise franchiseDtoToFranchise(FranchiseDTO franchiseDTO);
 
     @Named(value = "moviesToMoviesId")
     default Set<Integer> map(Set<Movie> value){

@@ -72,7 +72,9 @@ public class CharacterController {
     public ResponseEntity add(@RequestBody CharacterDTO entity) throws URISyntaxException {
         //add character
         characterMapper.characterToCharacterDTO(
-                characterService.add(characterService.findById(entity.getId()))); //calls the character service to add the character by id
+                characterService.add(
+                        characterMapper.characterDtoToCharacter(entity)
+                )); //calls the character service to add the character by id
         URI uri = new URI("api/v1/characters/" + entity.getId()); //making a new uri with the characters id
         return ResponseEntity.created(uri).build();
     }
@@ -97,7 +99,9 @@ public class CharacterController {
         if(id != entity.getId())  //checks if the given id is same with the given characters actual id
             return  ResponseEntity.badRequest().build();  //if ids are different returns bad request response
         characterMapper.characterToCharacterDTO(
-                characterService.update(characterService.findById(entity.getId()))); //updates the character
+                characterService.update(
+                        characterMapper.characterDtoToCharacter(entity)
+                )); //updates the character
         return ResponseEntity.noContent().build();
     }
 

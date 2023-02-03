@@ -1,5 +1,6 @@
 package com.example.moviecharactersapi.controllers;
 
+import com.example.moviecharactersapi.mappers.CharacterMapper;
 import com.example.moviecharactersapi.mappers.MovieMapper;
 import com.example.moviecharactersapi.models.Movie;
 import com.example.moviecharactersapi.models.dto.movie.MovieDTO;
@@ -23,9 +24,11 @@ import java.net.URISyntaxException;
 public class MovieController {
     private final MovieService movieService;
     private  final MovieMapper movieMapper;
-    public MovieController(MovieService movieService, MovieMapper movieMapper) {
+    private final CharacterMapper characterMapper;
+    public MovieController(MovieService movieService, MovieMapper movieMapper, CharacterMapper characterMapper) {
         this.movieService = movieService;
         this.movieMapper = movieMapper;
+        this.characterMapper = characterMapper;
     }
 
     @Operation(summary = "Gets all the Movies")
@@ -68,7 +71,10 @@ public class MovieController {
     public ResponseEntity add(@RequestBody MovieDTO entity) throws URISyntaxException {
         //add movie
         movieMapper.movieToMovieDTO(
-                movieService.add(movieService.findById(entity.getId()))); //calls the movie service to add the character by id
+                movieService.add(
+                        movieMapper.movieDtoToMovie(entity)
+                ));
+
         //creating uri with new movies id
         URI uri = new URI("api/v1/movies/" + entity.getId());
         return ResponseEntity.created(uri).build();
@@ -94,7 +100,8 @@ public class MovieController {
         if(id != entity.getId()) //checks if the given id is same with the given movie actual id
             return ResponseEntity.badRequest().build(); //if ids are different returns bad request response
         movieMapper.movieToMovieDTO(
-                movieService.update(movieService.findById(entity.getId()))); //updates the movie
+                movieService.update(
+                        movieMapper.movieDtoToMovie(entity))); //updates the movie
         return ResponseEntity.noContent().build();
     }
 
@@ -108,7 +115,7 @@ public class MovieController {
     })
     @GetMapping("{id}/characters")
     public ResponseEntity getCharacters(@PathVariable int id){
-        return ResponseEntity.ok(movieService.getCharacters(id));
+        return ResponseEntity.ok(characterMapper.characterToCharacterDTO(movieService.getCharacters(id)));
     }
 
 

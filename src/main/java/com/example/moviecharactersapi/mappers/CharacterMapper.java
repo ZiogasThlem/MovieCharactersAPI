@@ -3,6 +3,7 @@ package com.example.moviecharactersapi.mappers;
 import com.example.moviecharactersapi.models.Character;
 import com.example.moviecharactersapi.models.Movie;
 import com.example.moviecharactersapi.models.dto.character.CharacterDTO;
+import com.example.moviecharactersapi.models.dto.movie.MovieDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
@@ -13,12 +14,14 @@ import java.util.stream.Collectors;
 
 @Mapper(componentModel = "spring")
 public interface CharacterMapper {
-
-    @Mapping(target = "name", source = "full_name")
+    
     @Mapping(target = "movies", qualifiedByName = "moviesToMoviesId")
     CharacterDTO characterToCharacterDTO(Character character);
 
     Collection<CharacterDTO> characterToCharacterDTO(Collection<Character> character);
+
+    @Mapping(target = "movies", ignore = true)
+    Character characterDtoToCharacter(CharacterDTO characterDTO);
 
     @Named(value = "moviesToMoviesId")
     default Set<Integer> map(Set<Movie> value){

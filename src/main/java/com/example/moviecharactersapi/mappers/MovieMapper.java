@@ -20,6 +20,10 @@ public interface MovieMapper {
 
     Collection<MovieDTO> movieToMovieDTO(Collection<Movie> movie);
 
+    @Mapping(target = "franchise", ignore = true)
+    @Mapping(target = "characters", ignore = true)
+    Movie movieDtoToMovie(MovieDTO movieDTO);
+
     @Named(value = "charactersToCharactersId")
     default Set<Integer> map(Set<Character> value) {
         if (value == null)

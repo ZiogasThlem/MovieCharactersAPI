@@ -3,6 +3,7 @@ package com.example.moviecharactersapi.services.franchise;
 import com.example.moviecharactersapi.models.Character;
 import com.example.moviecharactersapi.models.Movie;
 import com.example.moviecharactersapi.models.Franchise;
+import com.example.moviecharactersapi.models.dto.franchise.FranchiseDTO;
 import com.example.moviecharactersapi.services.CrudService;
 
 import java.util.Collection;

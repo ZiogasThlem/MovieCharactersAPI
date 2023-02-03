@@ -12,6 +12,7 @@ public class MovieDTO {
     private String title;
     private String genre;
     private String year_of_release;
+    private String director;
     private int franchise;
     private Collection<Integer> characters;
 
