@@ -1,4 +1,4 @@
-package com.example.moviecharactersapi.services.service_interfaces;
+package com.example.moviecharactersapi.services;
 
 import java.util.Collection;
 
@@ -8,6 +8,4 @@ public interface CrudService <T, ID> {
     T add(T entity);
     T update(T entity);
     void deleteById(ID id);
-    void delete(T entity);
-    boolean exists(ID id);
 }

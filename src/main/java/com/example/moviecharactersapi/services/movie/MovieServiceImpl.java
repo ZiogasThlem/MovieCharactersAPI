@@ -1,12 +1,9 @@
-package com.example.moviecharactersapi.services.service_classes;
+package com.example.moviecharactersapi.services.movie;
 
 import com.example.moviecharactersapi.models.Character;
 import com.example.moviecharactersapi.models.Movie;
 import com.example.moviecharactersapi.repositories.CharacterRepository;
 import com.example.moviecharactersapi.repositories.MovieRepository;
-import com.example.moviecharactersapi.services.service_interfaces.MovieService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -18,7 +15,6 @@ public class MovieServiceImpl  implements MovieService {
 
     private final MovieRepository movieRepository;
     private final CharacterRepository characterRepository;
-    private final Logger logger = LoggerFactory.getLogger(MovieServiceImpl.class);
 
     public MovieServiceImpl(MovieRepository movieRepository, CharacterRepository characterRepository) {
         this.movieRepository = movieRepository;
@@ -41,25 +37,18 @@ public class MovieServiceImpl  implements MovieService {
     public void deleteById(Integer integer) { movieRepository.deleteById(integer); }
 
     @Override
-    public void delete(Movie entity) { movieRepository.delete(entity); }
-
-    @Override
-    public boolean exists(Integer integer) { return movieRepository.existsById(integer); }
-
-
-    @Override
     public Collection<Character> getCharacters(int characterId) {
         return movieRepository.findById(characterId).get().getCharacters();
     }
 
     @Override
     public void updateCharacters(int movieId, int[] characters) {
-        Movie movie = movieRepository.findById(movieId).get();
-        Set<Character> characterList = new HashSet<>();
-        for (int id : characters) {
-            characterList.add(characterRepository.findById(id).get());
+        Movie movie = movieRepository.findById(movieId).get(); //getting the movie from id
+        Set<Character> characterList = new HashSet<>(); //creating a set to hold the characters
+        for (int id : characters) { //for every character id
+            characterList.add(characterRepository.findById(id).get()); //add this character to the characterList
       }
-        movie.setCharacters(characterList);
-        movieRepository.save(movie);
+        movie.setCharacters(characterList); //setting this set of characters to the movie
+        movieRepository.save(movie); //saving the updated movie
     }
 }

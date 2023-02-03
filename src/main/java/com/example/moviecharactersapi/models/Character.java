@@ -1,7 +1,5 @@
 package com.example.moviecharactersapi.models;
 
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -15,14 +13,18 @@ public class  Character {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Column(length=50, nullable = false)
-    private String full_name;
+    private String name;
     @Column(length=50)
     private String alias;
-    @Enumerated(EnumType.STRING)
-    private GenderType gender;
+    @Column(length=20)
+    private String gender;
     @Column(length = 100)
     private String picture;
-    @JsonIgnore
     @ManyToMany(mappedBy = "characters")
     private Set<Movie> movies;
+
+    public void removeMovie(Movie movie) { //this function made to remove a movie from a character
+        this.movies.remove(movie);
+        movie.getCharacters().remove(this);
+    }
 }

@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Collection;
 import java.util.Set;
 
 @Entity
@@ -31,5 +32,10 @@ public class Movie {
     private Franchise franchise;
     @JsonIgnore
     @ManyToMany
+    @JoinTable(
+            name = "movie_characters",
+            joinColumns = {@JoinColumn(name = "movies_id")},
+            inverseJoinColumns = {@JoinColumn(name = "characters_id")}
+    )
     private Set<Character> characters;
 }
